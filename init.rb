@@ -8,11 +8,11 @@ class Heroku::Client
   end
 
   def route_assoc(app_name, url, ps)
-    put("/apps/#{app_name}/routes", {"url" => URI.escape(url), "ps" => URI.escape(ps)})
+    put("/apps/#{app_name}/routes/assoc", {"url" => URI.escape(url), "ps" => URI.escape(ps)})
   end
 
-  def route_dissoc(app_name, url)
-    put("/apps/#{app_name}/routes", {"url" => URI.escape(url)})
+  def route_dissoc(app_name, url, ps)
+    put("/apps/#{app_name}/routes/dissoc", {"url" => URI.escape(url), "ps" => URI.escape(ps)})
   end
 
   def route_destroy(app_name, url)
@@ -26,15 +26,15 @@ module Heroku::Command
       group.command "routes",                    "list all routes"
       group.command "routes:create",             "create a route"
       group.command "routes:assoc   <url> <ps>", "associate a process to a route"
-      group.command "routes:dissoc  <url>",      "dissociate a process from a route"
+      group.command "routes:dissoc  <url> <ps>", "dissociate a process from a route"
       group.command "routes:destroy <url>",      "destroy a route"
     end
 
     def index
       routes = heroku.routes(app)
       output = []
-      output << "Route                         Process     "
-      output << "----------------------------  ------------"
+      output << "Route                         Processes                   "
+      output << "----------------------------  ----------------------------"
       routes.each do |route|
         output << "%-28s  %-12s" % [route["url"], route["ps"]]
       end
@@ -57,9 +57,10 @@ module Heroku::Command
     end
 
     def dissoc
-      url = args.shift || abort("Usage: heroku routes:dissoc <url>")
-      display("Dissociating route #{url}... ", false)
-      heroku.route_dissoc(app, url)
+      url = args.shift
+      ps = args.shift || abort("Usage: heroku routes:dissoc <url> <ps>")
+      display("Dissociating route #{url} from #{ps}... ", false)
+      heroku.route_dissoc(app, url, ps)
       display("done")
     end
 
