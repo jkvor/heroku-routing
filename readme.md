@@ -4,12 +4,11 @@
 
     $ heroku plugins:install git@github.com:heroku/heroku-routing.git
     $ heroku help | grep routes
-    routes                        # list all routes
-    routes:create                 # create a route
-    routes:assoc   <url> <ps>     # associate a process to a route
-    routes:dissoc  <url>          # dissociate a process from a route
-    routes:destroy <url>          # destroy a route
-
+    routes                                     # list all routes
+    routes:create                              # create a route
+    routes:assoc   <url> <ps>                  # associate a process to a route
+    routes:dissoc  <url> <ps>                  # dissociate a process from a route
+    routes:destroy <url>                       # destroy a route
 
 ## Example
  
