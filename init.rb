@@ -7,12 +7,12 @@ class Heroku::Client
     JSON.parse(post("/apps/#{app_name}/routes").to_s)
   end
 
-  def route_assoc(app_name, url, ps)
-    put("/apps/#{app_name}/routes/assoc", {"url" => URI.escape(url), "ps" => URI.escape(ps)})
+  def route_attach(app_name, url, ps)
+    put("/apps/#{app_name}/routes/attach", {"url" => URI.escape(url), "ps" => URI.escape(ps)})
   end
 
-  def route_dissoc(app_name, url, ps)
-    put("/apps/#{app_name}/routes/dissoc", {"url" => URI.escape(url), "ps" => URI.escape(ps)})
+  def route_detach(app_name, url, ps)
+    put("/apps/#{app_name}/routes/detach", {"url" => URI.escape(url), "ps" => URI.escape(ps)})
   end
 
   def route_destroy(app_name, url)
@@ -25,8 +25,8 @@ module Heroku::Command
     Help.group("Routing") do |group|
       group.command "routes",                    "list all routes"
       group.command "routes:create",             "create a route"
-      group.command "routes:assoc   <url> <ps>", "associate a process to a route"
-      group.command "routes:dissoc  <url> <ps>", "dissociate a process from a route"
+      group.command "routes:attach  <url> <ps>", "attach a process to a route"
+      group.command "routes:detach  <url> <ps>", "detach a process from a route"
       group.command "routes:destroy <url>",      "destroy a route"
     end
 
@@ -48,19 +48,19 @@ module Heroku::Command
       display(route["url"])
     end
 
-    def assoc
+    def attach
       url = args.shift
-      ps = args.shift || abort("Usage: heroku routes:assoc <url> <ps>")
+      ps = args.shift || abort("Usage: heroku routes:attach <url> <ps>")
       display("Associating route #{url} to #{ps}... ", false)
-      heroku.route_assoc(app, url, ps)
+      heroku.route_attach(app, url, ps)
       display("done")
     end
 
-    def dissoc
+    def detach
       url = args.shift
-      ps = args.shift || abort("Usage: heroku routes:dissoc <url> <ps>")
+      ps = args.shift || abort("Usage: heroku routes:detach <url> <ps>")
       display("Dissociating route #{url} from #{ps}... ", false)
-      heroku.route_dissoc(app, url, ps)
+      heroku.route_detach(app, url, ps)
       display("done")
     end
 

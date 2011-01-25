@@ -6,8 +6,8 @@
     $ heroku help | grep routes
     routes                                     # list all routes
     routes:create                              # create a route
-    routes:assoc   <url> <ps>                  # associate a process to a route
-    routes:dissoc  <url> <ps>                  # dissociate a process from a route
+    routes:attach  <url> <ps>                  # attach a process to a route
+    routes:detach  <url> <ps>                  # detach a process from a route
     routes:destroy <url>                       # destroy a route
 
 ## Example
@@ -34,9 +34,9 @@ Start a process that will serve as the endpoint:
     $ heroku ps:run 'nc -l $PORT'
     Running `nc -l $PORT` attached to terminal... up, ps.2
 
-In another terminal, associate the route to the process:
+In another terminal, attach the route to the process:
 
-    $ heroku routes:assoc ip://11.323.234.12:58679 ps.2
+    $ heroku routes:attach ip://11.323.234.12:58679 ps.2
     Associating route ip://11.323.234.12:58679 to ps.2... done
 
     $ heroku routes
@@ -55,9 +55,9 @@ Then connect to the endpoint process via the route:
 
 You should see `hello, route!` in the terminal of the `nc` process.
 
-While your telnet connection is still open, dissociate the route from the process:
+While your telnet connection is still open, detach the route from the process:
 
-    $ heroku routes:dissoc ip://11.323.234.12:58679
+    $ heroku routes:detach ip://11.323.234.12:58679
     Dissociating route ip://11.323.234.12:58679... done
     
     $ heroku routes
@@ -66,7 +66,7 @@ While your telnet connection is still open, dissociate the route from the proces
     ip://11.323.234.12:58679      
 
 You should still be able to communicate over your existing connection, but
-subsequent attempts will fail now that the route has been dissociated.
+subsequent attempts will fail now that the route has been detach.
 
 To permanently destroy the route:
 
