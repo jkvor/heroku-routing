@@ -51,7 +51,7 @@ module Heroku::Command
     def attach
       url = args.shift
       ps = args.shift || abort("Usage: heroku routes:attach <url> <ps>")
-      display("Associating route #{url} to #{ps}... ", false)
+      display("Attaching route #{url} to #{ps}... ", false)
       heroku.route_attach(app, url, ps)
       display("done")
     end
@@ -59,7 +59,7 @@ module Heroku::Command
     def detach
       url = args.shift
       ps = args.shift || abort("Usage: heroku routes:detach <url> <ps>")
-      display("Dissociating route #{url} from #{ps}... ", false)
+      display("Detaching route #{url} from #{ps}... ", false)
       heroku.route_detach(app, url, ps)
       display("done")
     end
