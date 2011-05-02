@@ -1,16 +1,4 @@
 # heroku-routing
-
-## Synopsis
-
-    $ heroku plugins:install git@github.com:heroku/heroku-routing.git
-    $ heroku help | grep routes
-    routes                                     # list all routes
-    routes:create                              # create a route
-    routes:attach  <url> <ps>                  # attach a process to a route
-    routes:detach  <url> <ps>                  # detach a process from a route
-    routes:destroy <url>                       # destroy a route
-
-## Example
  
 Create an app that will be routed to:
 
