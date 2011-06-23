@@ -3,8 +3,9 @@ class Heroku::Client
     OkJson.decode(get("/apps/#{app_name}/routes").to_s)
   end
 
-  def routes_create(app_name)
-    OkJson.decode(post("/apps/#{app_name}/routes").to_s)
+  def routes_create(app_name, proto=nil)
+    query = (proto.nil? ? "" : "?proto=#{proto}")
+    OkJson.decode(post("/apps/#{app_name}/routes#{query}").to_s)
   end
 
   def route_attach(app_name, url, ps)

@@ -24,7 +24,12 @@ module Heroku::Command
     #
     def create
       display("Creating route... ", false)
-      route = heroku.routes_create(app)
+      proto = nil
+      case args.shift
+        when "--proto"
+          proto = args.shift
+      end
+      route = heroku.routes_create(app, proto)
       display("done")
       display(route["url"])
     end
