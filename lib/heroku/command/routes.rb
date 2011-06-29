@@ -10,11 +10,15 @@ module Heroku::Command
     def index
       routes = heroku.routes(app)
       output = []
-      output << "Route                         Process                   "
-      output << "----------------------------  --------------------------"
+      hdr1_width = 10
+      hdr2_width = 10
       routes.each do |route|
+        hdr1_width = route["url"].length if route["url"].length > hdr1_width
+        hdr2_width = route["ps"].length if route["ps"].length > hdr2_width
         output << "%-28s  %-12s" % [route["url"], route["ps"]]
       end
+      display("Route".ljust(hdr1_width) + "  Process".ljust(hdr2_width))
+      display(('-' * hdr1_width) + "  " + ('-' * hdr2_width))
       display(output.join("\n"))
     end
 
