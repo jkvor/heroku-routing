@@ -2,7 +2,7 @@
  
 Create an app that will be routed to:
 
-    $ heroku create --stack capstan
+    $ heroku create --stack cedar
 
 Create a route:
 
