@@ -17,7 +17,7 @@ Create a route:
 
 Start a process that will serve as the endpoint:
 
-    $ heroku ps:run 'nc -l $PORT'
+    $ heroku run 'nc -l $PORT'
     Running `nc -l $PORT` attached to terminal... up, ps.2
 
 In another terminal, attach the route to the process:
@@ -32,7 +32,7 @@ In another terminal, attach the route to the process:
 
 Then connect to the endpoint process via the route:
 
-    $ heroku ps:run 'telnet route.heroku.com 58679'
+    $ heroku run 'telnet route.heroku.com 58679'
     Running `telnet route.heroku.com 58679` attached to terminal... up, ps.3
     Trying 107.20.247.209...
     Connected to ec2-107-20-247-209.compute-1.amazonaws.com.
