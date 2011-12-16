@@ -1,6 +1,6 @@
 # heroku-routing
 
-Create an app using the node tempolate:
+Create an app using the node template:
 
     $ git clone git@github.com:JacobVorreuter/hello-node.git
     Initialized empty Git repository in /private/tmp/hello-node/.git/
@@ -11,6 +11,7 @@ Create an app using the node tempolate:
     Resolving deltas: 100% (12/12), done.
 
     $ cd hello-node/
+
     $ heroku create --stack cedar
     Creating blazing-mist-4424... done, stack is cedar
     http://blazing-mist-4424.herokuapp.com/ | git@heroku.com:blazing-mist-4424.git
@@ -58,6 +59,11 @@ Attach your web.1 process to your TCP route:
 
     $ heroku routes:attach tcp://route.heroku.com:26393 web.1
     Attaching route tcp://route.heroku.com:26393 to web.1... done
+
+    $ heroku routes
+    Route                         Process 
+    ----------------------------  ----------
+    tcp://route.heroku.com:26393  web.1
 
 Connect to your TCP endpoint:
 
