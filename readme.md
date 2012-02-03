@@ -1,5 +1,9 @@
 # heroku-routing
 
+Install the heroku-routing client plugin:
+
+    $ heroku plugins:install https://github.com/JacobVorreuter/heroku-routing
+
 Create an app using the node template:
 
     $ git clone git@github.com:JacobVorreuter/hello-node.git
