@@ -1,3 +1,7 @@
+# **THIS FEATURE IS NO LONGER AVAILABLE**
+
+watch [Heroku labs](https://devcenter.heroku.com/articles/labs) for cool, new routing experiments...
+
 # heroku-routing
 
 Install the heroku-routing client plugin:
